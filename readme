@@ -1,0 +1,8 @@
+The shell script setup-jumpman-00.sh has the objetive to be used to setup the jumphost needed to perform SAS Viya deployment on Azure.
+This specific script can be used to configure the jumphost during its creation using Microsoft Azure Extensions. 
+So it can be used by Azure Admin responsible to provide the SAS infrastructure, for example. 
+
+The shell script setup-jumpman-01.sh should be used to perform the initial setup of jumphost once you has access to it.
+It will install all base tools needed to run setup-jumpman-02.sh.
+
+The shell script setup-jumpman-02.sh should be used to setup all tools needed by your SAS Deployment Professional to deploy SAS Viya Software.
