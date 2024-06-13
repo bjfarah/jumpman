@@ -1,6 +1,6 @@
 #!/bin/bash
 # Written by Benjamim "BJ" Farah for Ubuntu - Jun/2024
-# setup-jumpman.sh
+# setup-jumpman-00.sh
 # Install packages
 sudo apt-get update
 sudo snap install git
