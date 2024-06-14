@@ -26,7 +26,7 @@ write_files:
       semantic_version>=2.8.5
 runcmd:      
   - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-  - az extension add --name azure-devops  
+  - az extension add --name azure-devops --allow-preview false  
   - python3 -m pip install -r requirements.txt
   - helm repo add jetstack https://charts.jetstack.io
   - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
