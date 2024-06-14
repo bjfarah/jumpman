@@ -15,9 +15,10 @@ packages:
 - kubectl
 write_files:
  - owner: azureuser:azureuser
-    path: /tmp/requirements.txt
-    defer: true
-    content: |
+   path: /home/azureuser/requirements.txt
+   permissions: '0644'
+   defer: true
+   content: |
       jinja2>=2.11.3
       Pint>=0.11
       requests>=2.22.0
