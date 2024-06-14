@@ -13,3 +13,33 @@ packages:
 - jq
 - terraform
 - kubectl
+write_files:
+ - owner: azureuser:azureuser
+    path: /home/azureuser/requirements.txt
+    defer: true
+    content: |
+      jinja2>=2.11.3
+      Pint>=0.11
+      requests>=2.22.0
+      pyyaml>=5.4
+      ldap3==2.9
+      semantic_version>=2.8.5
+runcmd:      
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  - az extension add --name azure-devops  
+  - python3 -m pip install -r requirements.txt
+  - helm repo add jetstack https://charts.jetstack.io
+  - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  - helm repo update
+  - mkdir ~/sas-deployment-tools
+  - cd ~/sas-deployment-tools
+  - git clone https://github.com/sassoftware/viya4-iac-azure.git
+  - git clone https://github.com/sassoftware/viya4-iac-aws.git
+  - git clone https://github.com/sassoftware/viya4-iac-gcp.git
+  - git clone https://github.com/sassoftware/viya4-iac-k8s.git
+  - git clone https://github.com/sassoftware/viya4-ark.git
+  - git clone https://github.com/sassoftware/viya4-monitoring-kubernetes.git
+  - git clone https://github.com/sassoftware/pyviyatools.git
+  - git clone https://github.com/sassoftware/viya4-deployment.git
+  - git clone https://github.com/sassoftware/viya4-orders-cli.git
+  - wget https://github.com/sassoftware/viya4-orders-cli/releases/download/1.6.0/viya4-orders-cli_linux_amd64
