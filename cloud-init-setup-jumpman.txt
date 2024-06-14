@@ -31,8 +31,8 @@ runcmd:
   - helm repo add jetstack https://charts.jetstack.io
   - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
   - helm repo update
-  - mkdir ~/sas-deployment-tools
-  - cd ~/sas-deployment-tools
+  - mkdir /home/azureuser/sas-deployment-tools
+  - cd /home/azureuser/sas-deployment-tools
   - git clone https://github.com/sassoftware/viya4-iac-azure.git
   - git clone https://github.com/sassoftware/viya4-iac-aws.git
   - git clone https://github.com/sassoftware/viya4-iac-gcp.git
