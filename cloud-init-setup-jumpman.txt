@@ -1,18 +1,17 @@
 #cloud-config
 package_upgrade: true
 packages:
-- apt-get
 - git
 - unzip
 - python3
 - pip
 - docker
-- helm
+- helm --classic
 - kustomize
 - yq
 - jq
-- terraform
-- kubectl
+- terraform --classic
+- kubectl --classic
 write_files:
  - owner: azureuser:azureuser
    path: /home/azureuser/requirements.txt
