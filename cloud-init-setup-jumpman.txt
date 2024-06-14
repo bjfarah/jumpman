@@ -4,7 +4,6 @@ packages:
 - git
 - unzip
 - python3
-- pip
 - docker
 - helm --classic
 - kustomize
@@ -27,6 +26,7 @@ write_files:
 runcmd:      
   - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   - az extension add --name azure-devops --allow-preview false  
+  - sudo apt install python3-pip
   - python3 -m pip install -r requirements.txt
   - helm repo add jetstack https://charts.jetstack.io
   - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
