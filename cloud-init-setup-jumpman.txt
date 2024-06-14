@@ -1,0 +1,15 @@
+#cloud-config
+package_upgrade: true
+packages:
+- apt-get
+- git
+- unzip
+- python3
+- pip
+- docker
+- helm
+- kustomize
+- yq
+- jq
+- terraform
+- kubectl
