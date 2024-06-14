@@ -14,9 +14,9 @@ packages:
 - terraform
 - kubectl
 write_files:
- - owner:azureuser:azureuser
-    path:/home/azureuser/requirements.txt
-    defer:true
+ - owner: azureuser:azureuser
+    path: /tmp/requirements.txt
+    defer: true
     content: |
       jinja2>=2.11.3
       Pint>=0.11
