@@ -1,6 +1,14 @@
 #cloud-config
+apt:
+  conf: |
+    Acquire::Retries "60";
+    DPkg::Lock::Timeout "60";
+package_update: true
 package_upgrade: true
+package_reboot_if_required: true
 packages:
+- apt
+- curl 
 - git
 - unzip
 - python3
@@ -11,6 +19,9 @@ packages:
 - jq
 - terraform --classic
 - kubectl --classic
+- apt-transport-https
+- ca-certificates
+- software-properties-common
 write_files:
  - owner: azureuser:azureuser
    path: /home/azureuser/requirements.txt
@@ -23,14 +34,30 @@ write_files:
       pyyaml>=5.4
       ldap3==2.9
       semantic_version>=2.8.5
-runcmd:      
-  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-  - az extension add --name azure-devops --allow-preview false  
+runcmd: 
+  # Install AZURE CLI
+  - sudo curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  - sudo az extension add --name azure-devops --allow-preview false
+  # TERRAFORM
+  - sudo apt install -y terraform --classic
+  # KUBECTL
+  - sudo apt install -y kubectl --classic
+  # Install Docker
+  - sudo apt update -y && sudo apt upgrade -y
+  - sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+  - sudo apt install -y helm
+  - sudo apt install -y docker-ce
+  - sudo usermod -aG docker ubuntu
   - sudo apt install python3-pip
-  - python3 -m pip install -r requirements.txt
-  - helm repo add jetstack https://charts.jetstack.io
-  - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-  - helm repo update
+  - sudo python3 -m pip install -r requirements.txt
+  # HELM REPO SETUP
+  - sudo helm repo add jetstack https://charts.jetstack.io
+  - sudo helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  - sudo helm repo update
+  - sudo apt update -y helm
+  # SAS Viya Deployment Tools
   - mkdir /home/azureuser/sas-deployment-tools
   - cd /home/azureuser/sas-deployment-tools
   - git clone https://github.com/sassoftware/viya4-iac-azure.git
@@ -43,3 +70,4 @@ runcmd:
   - git clone https://github.com/sassoftware/viya4-deployment.git
   - git clone https://github.com/sassoftware/viya4-orders-cli.git
   - wget https://github.com/sassoftware/viya4-orders-cli/releases/download/1.6.0/viya4-orders-cli_linux_amd64
+  final_message: "The jumphost is finally up, after $UPTIME seconds. Keep moving!"
